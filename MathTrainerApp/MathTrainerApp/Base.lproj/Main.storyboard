@@ -236,9 +236,17 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dry-s3-yRt">
-                                <rect key="frame" x="50" y="109" width="61.666666666666657" height="35"/>
+                                <rect key="frame" x="50" y="109" width="80" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="6kj-9b-2s6"/>
+                                    <constraint firstAttribute="width" constant="80" id="Z7h-nJ-jD5"/>
+                                </constraints>
+                                <color key="tintColor" systemColor="systemYellowColor"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Back"/>
+                                <buttonConfiguration key="configuration" style="filled" title="&lt;&lt;&lt;">
+                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="20"/>
+                                    <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </buttonConfiguration>
                                 <connections>
                                     <segue destination="zT9-KA-ZvZ" kind="unwind" unwindAction="unwindActionWithUnwindSegue:" id="UF0-pq-TeC"/>
                                 </connections>
@@ -306,6 +314,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Duy-oz-v9E"/>
+                    <connections>
+                        <outletCollection property="buttonsTrainerCollection" destination="Mgr-mW-Adn" collectionClass="NSMutableArray" id="4oa-Hh-rRX"/>
+                        <outletCollection property="buttonsTrainerCollection" destination="xYn-Zl-dHB" collectionClass="NSMutableArray" id="cqh-Ld-ZZv"/>
+                        <outletCollection property="buttonsTrainerCollection" destination="dry-s3-yRt" collectionClass="NSMutableArray" id="npl-1U-c7Q"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CO1-ZS-2yW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="zT9-KA-ZvZ" userLabel="Exit" sceneMemberID="exit"/>
