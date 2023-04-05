@@ -14,6 +14,7 @@ enum MathTypes: Int {
 class ViewController: UIViewController {
     
     // MARK: - IBOutlet
+    
     @IBOutlet var buttonsColection: [UIButton]!
     
     // MARK: Properties

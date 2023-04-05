@@ -301,23 +301,32 @@
                                     <action selector="rightAction:" destination="wB9-am-zkh" eventType="touchUpInside" id="BW7-Fr-05P"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Верных ответов:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ob2-hI-UMA">
+                                <rect key="frame" x="211.66666666666663" y="109" width="131.33333333333337" height="20.333333333333343"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="akQ-Sc-PYE"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="dry-s3-yRt" firstAttribute="top" secondItem="akQ-Sc-PYE" secondAttribute="top" constant="50" id="AqX-4d-ilY"/>
                             <constraint firstItem="dry-s3-yRt" firstAttribute="leading" secondItem="akQ-Sc-PYE" secondAttribute="leading" constant="50" id="C8Y-DI-2fZ"/>
+                            <constraint firstItem="Ob2-hI-UMA" firstAttribute="top" secondItem="akQ-Sc-PYE" secondAttribute="top" constant="50" id="F5n-m1-ZMp"/>
                             <constraint firstItem="Mgr-mW-Adn" firstAttribute="centerX" secondItem="LTU-EO-8kP" secondAttribute="centerX" constant="60" id="MmN-HI-boy"/>
                             <constraint firstItem="Mgr-mW-Adn" firstAttribute="centerY" secondItem="xYn-Zl-dHB" secondAttribute="centerY" id="OId-ed-6j2"/>
                             <constraint firstItem="gvO-fq-aat" firstAttribute="centerY" secondItem="LTU-EO-8kP" secondAttribute="centerY" constant="-30" id="b4V-wK-aQg"/>
                             <constraint firstItem="xYn-Zl-dHB" firstAttribute="centerX" secondItem="LTU-EO-8kP" secondAttribute="centerX" constant="-60" id="fVh-OY-FFl"/>
                             <constraint firstItem="xYn-Zl-dHB" firstAttribute="top" secondItem="gvO-fq-aat" secondAttribute="bottom" constant="120" id="hr6-I8-u4d"/>
+                            <constraint firstItem="akQ-Sc-PYE" firstAttribute="trailing" secondItem="Ob2-hI-UMA" secondAttribute="trailing" constant="50" id="jUi-hS-t0C"/>
                             <constraint firstItem="gvO-fq-aat" firstAttribute="centerX" secondItem="LTU-EO-8kP" secondAttribute="centerX" id="jgk-dm-Mkv"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Duy-oz-v9E"/>
                     <connections>
                         <outlet property="backButton" destination="dry-s3-yRt" id="nIu-nc-VDj"/>
+                        <outlet property="correctAnswers" destination="Ob2-hI-UMA" id="Y8r-vI-kSF"/>
                         <outlet property="leftButton" destination="xYn-Zl-dHB" id="gPa-yV-95c"/>
                         <outlet property="questionLabel" destination="gvO-fq-aat" id="xIS-zj-sYi"/>
                         <outlet property="rightButton" destination="Mgr-mW-Adn" id="sU6-Ea-Tp0"/>

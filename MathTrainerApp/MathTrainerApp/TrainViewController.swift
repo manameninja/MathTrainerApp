@@ -6,7 +6,7 @@
 //
 
 import UIKit
- 
+
 final class TrainViewController: UIViewController {
     
     // MARK: - IBOutlets
@@ -15,13 +15,14 @@ final class TrainViewController: UIViewController {
     @IBOutlet weak var leftButton: UIButton!
     @IBOutlet weak var rightButton: UIButton!
     @IBOutlet weak var questionLabel: UILabel!
+    @IBOutlet weak var correctAnswers: UILabel!
     
     // MARK: - Properties
     private var firstNumber = 0
     private var secondNumber = 0
     private var sign: String = ""
     
-    var count: Int = 0 {
+    public var count: Int = 0 {
         didSet {
             print("Count: \(count)")
         }
@@ -100,10 +101,21 @@ final class TrainViewController: UIViewController {
     }
     
     private func configureQuestion() {
-        firstNumber = Int.random(in: 1...99)
-        secondNumber = Int.random(in: 1...99)
+        switch type {
+        case .add, .subtract, .multiply:
+            firstNumber = Int.random(in: 1...99)
+            secondNumber = Int.random(in: 1...99)
+        case .divide:
+            repeat {
+                firstNumber = Int.random(in: 1...99)
+                secondNumber = Int.random(in: 1...99)
+            }
+            while firstNumber % secondNumber != 0
+        }
+        
         let question: String = "\(firstNumber) \(sign) \(secondNumber) ="
         questionLabel.text = question
+        countsOfCorrectAnswer()
     }
 
     private func check(answer: String,  for button: UIButton) {
@@ -116,5 +128,9 @@ final class TrainViewController: UIViewController {
                 self?.configurateButtonsTrainer()
             }
         }
+    }
+    
+    private func countsOfCorrectAnswer() {
+        correctAnswers.text = "Верных ответов :\n\(count)"
     }
 }
