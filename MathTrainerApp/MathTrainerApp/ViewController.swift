@@ -12,13 +12,16 @@ enum MathTypes: Int {
 }
 
 class ViewController: UIViewController {
-    
     // MARK: - IBOutlet
+    @IBOutlet var buttonsCollection: [UIButton]!
+    @IBOutlet weak var addLabel: UILabel!
+    @IBOutlet weak var subtractLabel: UILabel!
+    @IBOutlet weak var multiplyLabel: UILabel!
+    @IBOutlet weak var divideLabel: UILabel!
     
-    @IBOutlet var buttonsColection: [UIButton]!
-    
-    // MARK: Properties
+    // MARK: - Properties
     private var selectedType: MathTypes = .add
+    var countOfCorrectAnswer = 0
     
     // MARK: - Life Cycle
     override func viewDidLoad() {
@@ -32,7 +35,16 @@ class ViewController: UIViewController {
         performSegue(withIdentifier: "goToNext", sender: sender)
     }
     
-    @IBAction func unwindAction(unwindSegue: UIStoryboardSegue) { }
+    @IBAction func unwindAction(unwindSegue: UIStoryboardSegue) {
+        if let source = unwindSegue.source as? TrainViewController {
+            switch source.type {
+            case .add: addLabel.text = String(source.correctAnswerCount)
+            case .subtract: subtractLabel.text = String(source.correctAnswerCount)
+            case .multiply: multiplyLabel.text = String(source.correctAnswerCount)
+            case .divide: divideLabel.text = String(source.correctAnswerCount)
+            }
+        }
+    }
     
     // MARK: - Methods
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -43,7 +55,7 @@ class ViewController: UIViewController {
     
     private func configurateButtons() {
         // Add shadow
-        buttonsColection.forEach { button in
+        buttonsCollection.forEach { button in
             button.layer.shadowColor = UIColor.darkGray.cgColor
             button.layer.shadowOffset = CGSize(width: 0, height: 2)
             button.layer.shadowOpacity = 0.4
@@ -51,4 +63,3 @@ class ViewController: UIViewController {
         }
     }
 }
-
