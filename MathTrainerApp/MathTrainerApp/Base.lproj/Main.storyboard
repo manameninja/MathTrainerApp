@@ -276,6 +276,7 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="buttonsAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="BeM-o5-Xky"/>
+                                    <action selector="leftAction:" destination="wB9-am-zkh" eventType="touchUpInside" id="hJd-yV-ybz"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mgr-mW-Adn">
@@ -297,6 +298,7 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="buttonsAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="H1B-nf-gSf"/>
+                                    <action selector="rightAction:" destination="wB9-am-zkh" eventType="touchUpInside" id="BW7-Fr-05P"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -315,9 +317,13 @@
                     </view>
                     <navigationItem key="navigationItem" id="Duy-oz-v9E"/>
                     <connections>
-                        <outletCollection property="buttonsTrainerCollection" destination="Mgr-mW-Adn" collectionClass="NSMutableArray" id="4oa-Hh-rRX"/>
-                        <outletCollection property="buttonsTrainerCollection" destination="xYn-Zl-dHB" collectionClass="NSMutableArray" id="cqh-Ld-ZZv"/>
-                        <outletCollection property="buttonsTrainerCollection" destination="dry-s3-yRt" collectionClass="NSMutableArray" id="npl-1U-c7Q"/>
+                        <outlet property="backButton" destination="dry-s3-yRt" id="nIu-nc-VDj"/>
+                        <outlet property="leftButton" destination="xYn-Zl-dHB" id="gPa-yV-95c"/>
+                        <outlet property="questionLabel" destination="gvO-fq-aat" id="xIS-zj-sYi"/>
+                        <outlet property="rightButton" destination="Mgr-mW-Adn" id="sU6-Ea-Tp0"/>
+                        <outletCollection property="buttonsTrainerCollection" destination="dry-s3-yRt" collectionClass="NSMutableArray" id="Oe6-xL-wwc"/>
+                        <outletCollection property="buttonsTrainerCollection" destination="xYn-Zl-dHB" collectionClass="NSMutableArray" id="ViA-bW-9jU"/>
+                        <outletCollection property="buttonsTrainerCollection" destination="Mgr-mW-Adn" collectionClass="NSMutableArray" id="Xlz-EO-rvk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CO1-ZS-2yW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
