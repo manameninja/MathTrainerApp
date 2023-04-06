@@ -115,18 +115,21 @@ final class TrainViewController: UIViewController {
 
     private func check(answer: String,  for button: UIButton) {
         let isRightAnswer = Int(answer) == self.answer
-        button.backgroundColor = isRightAnswer ? .systemGreen : .systemRed
-        leftButtonAnswer.isEnabled = false
-        rightButtonAnswer.isEnabled = false
+        let incorrectAnswerColor = UIColor.red
+        button.backgroundColor = isRightAnswer ? .systemGreen : incorrectAnswerColor
         if isRightAnswer {
-            correctAnswerCount += 1
+            let isSecondAttempt = leftButtonAnswer.backgroundColor == incorrectAnswerColor
+            || rightButtonAnswer.backgroundColor == incorrectAnswerColor
+            leftButtonAnswer.isEnabled = isRightAnswer ? false : true
+            rightButtonAnswer.isEnabled = isRightAnswer ? false : true
+            correctAnswerCount += isSecondAttempt ? 0 : 1
             showCorrectAnswerCount()
-        }
-        DispatchQueue.main.asyncAfter(deadline:.now() + 1) { [weak self] in
-            self?.leftButtonAnswer.isEnabled = true
-            self?.rightButtonAnswer.isEnabled = true
-            self?.configureQuestion()
-            self?.configurateButtonsTrainer()
+            DispatchQueue.main.asyncAfter(deadline:.now() + 1) { [weak self] in
+                self?.leftButtonAnswer.isEnabled = true
+                self?.rightButtonAnswer.isEnabled = true
+                self?.configureQuestion()
+                self?.configurateButtonsTrainer()
+            }
         }
     }
     

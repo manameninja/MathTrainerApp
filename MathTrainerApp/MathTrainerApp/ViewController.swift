@@ -21,7 +21,6 @@ class ViewController: UIViewController {
     
     // MARK: - Properties
     private var selectedType: MathTypes = .add
-    var countOfCorrectAnswer = 0
     
     // MARK: - Life Cycle
     override func viewDidLoad() {
