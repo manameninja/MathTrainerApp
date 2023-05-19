@@ -23,6 +23,9 @@ final class TrainViewController: UIViewController {
     public var correctAnswerCount: Int = 0 {
         didSet {
             print("Count: \(correctAnswerCount)")
+            // Save data
+            UserDefaults.standard.set(correctAnswerCount, forKey: type.key)
+            //UserDefaults.container?.set(correctAnswerCount, forKey: type.key)
         }
     }
     
@@ -57,9 +60,15 @@ final class TrainViewController: UIViewController {
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let correctAnswerCount = UserDefaults.standard.object(forKey: type.key) as? Int {
+            self.correctAnswerCount = correctAnswerCount
+        }
+        
         configureQuestion()
-        configurateButtonsTrainer()
+        configureButtonsTrainer()
         addShadow()
+        showCorrectAnswerCount()
     }
     
     // MARK: - IBActions
@@ -70,8 +79,8 @@ final class TrainViewController: UIViewController {
         check(answer: sender.titleLabel?.text ?? "", for: sender)
     }
     
-    // MARK: - Methods
-    private func configurateButtonsTrainer() {
+    // MARK: - Private Methods
+    private func configureButtonsTrainer() {
         let defaultColor: UIColor = .systemYellow
         leftButtonAnswer.backgroundColor = defaultColor
         rightButtonAnswer.backgroundColor = defaultColor
@@ -120,15 +129,16 @@ final class TrainViewController: UIViewController {
         if isRightAnswer {
             let isSecondAttempt = leftButtonAnswer.backgroundColor == incorrectAnswerColor
             || rightButtonAnswer.backgroundColor == incorrectAnswerColor
-            leftButtonAnswer.isEnabled = isRightAnswer ? false : true
-            rightButtonAnswer.isEnabled = isRightAnswer ? false : true
+            leftButtonAnswer.isEnabled = false
+            rightButtonAnswer.isEnabled = false
             correctAnswerCount += isSecondAttempt ? 0 : 1
             showCorrectAnswerCount()
+            
             DispatchQueue.main.asyncAfter(deadline:.now() + 1) { [weak self] in
                 self?.leftButtonAnswer.isEnabled = true
                 self?.rightButtonAnswer.isEnabled = true
                 self?.configureQuestion()
-                self?.configurateButtonsTrainer()
+                self?.configureButtonsTrainer()
             }
         }
     }
@@ -136,4 +146,9 @@ final class TrainViewController: UIViewController {
     private func showCorrectAnswerCount() {
         correctAnswers.text = "Верных ответов :\n\(correctAnswerCount)"
     }
+}
+
+//Create new UserDefaults storage
+extension UserDefaults {
+    static let container = UserDefaults(suiteName: "container")
 }

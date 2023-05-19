@@ -7,8 +7,21 @@
 
 import UIKit
 
-enum MathTypes: Int {
+enum MathTypes: Int, CaseIterable {
     case add, subtract, multiply, divide
+    
+    var key: String {
+        switch self {
+        case .add:
+            return "addCount"
+        case .subtract:
+            return "subtractCount"
+        case .multiply:
+            return "multiplyCount"
+        case .divide:
+            return "divideCount"
+        }
+    }
 }
 
 class ViewController: UIViewController {
@@ -25,25 +38,39 @@ class ViewController: UIViewController {
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        configurateButtons()
+        
+        setCountLabels()
+        configureButtons()
     }
     
     // MARK: - IBAction
+    @IBAction func clearButtonAction(_ sender: Any) {
+        let alert = UIAlertController(title: "Предупреждение", message: "Вы действительно хотите обнулить очки?", preferredStyle: .alert)
+        let noAction = UIAlertAction(title: "Нет", style: .destructive)
+        let yesAction = UIAlertAction(title: "Да", style: .default, handler: { action in
+            MathTypes.allCases.forEach { type in
+                let key = type.key
+                
+                UserDefaults.standard.removeObject(forKey: key)
+                self.clearLabels()
+            }
+        })
+        
+        alert.addAction(yesAction)
+        alert.addAction(noAction)
+        present(alert, animated: true)
+    }
+    
     @IBAction func buttonsAction(_ sender: UIButton) {
         selectedType = MathTypes(rawValue: sender.tag) ?? .add
         performSegue(withIdentifier: "goToNext", sender: sender)
     }
     
     @IBAction func unwindAction(unwindSegue: UIStoryboardSegue) {
-        if let source = unwindSegue.source as? TrainViewController {
-            switch source.type {
-            case .add: addLabel.text = String(source.correctAnswerCount)
-            case .subtract: subtractLabel.text = String(source.correctAnswerCount)
-            case .multiply: multiplyLabel.text = String(source.correctAnswerCount)
-            case .divide: divideLabel.text = String(source.correctAnswerCount)
-            }
-        }
+        setCountLabels()
     }
+    
+    
     
     // MARK: - Methods
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -52,7 +79,34 @@ class ViewController: UIViewController {
         }
     }
     
-    private func configurateButtons() {
+    // MARK: - Private Methods
+    private func clearLabels() {
+        addLabel.text = "-"
+        subtractLabel.text = "-"
+        multiplyLabel.text = "-"
+        divideLabel.text = "-"
+    }
+    
+    private func setCountLabels() {
+        MathTypes.allCases.forEach { type in
+            let key = type.key
+            guard let count = UserDefaults.standard.object(forKey: key) as? Int else { return }
+            let stringCount = String(count)
+            
+            switch type {
+            case .add:
+                addLabel.text = stringCount
+            case .subtract:
+                subtractLabel.text = stringCount
+            case .multiply:
+                multiplyLabel.text = stringCount
+            case .divide:
+                divideLabel.text = stringCount
+            }
+        }
+    }
+    
+    private func configureButtons() {
         // Add shadow
         buttonsCollection.forEach { button in
             button.layer.shadowColor = UIColor.darkGray.cgColor
